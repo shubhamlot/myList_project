@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="{% static 'todolist/css/style.css' %}">
+
+</head>
+<body>  
+<header>	
+<nav>
+	<ul>
+		<h1>myList</h1>
+
+	</ul>
+	<div class="dropdown">
+
+  <div  class="logo"><h4 onclick="myFunction()" class="dropbtn">{{ user.Username|slice:"1" }}</h4></div>
+  <div id="myDropdown" class="dropdown-content">
+    <div class="profile">
+      <h3>{{ user.Username }}</h3>
+      <h5>RefId:{{ user.RefId }}</h5>
+    </div>
+    <a href="#">Profile</a>
+    <a href="#">Setting</a>
+    <a href="logout">Logout</a>
+  </div>
+  </div>
+
+	
+</nav>
+</header>
+
+<main>
+
+<section class="box">
+	<div class="container">
+{% for t in task %}
+	<div class="taskbox">
+		<div class="title">{{ t.TaskName }} 
+      <span class="check">&#10004;</span></div>
+		<div class="disc"><p>{{ t.Discription }}</p></div>
+		<div class="datetime"><sup>{{ t.Date }}</sup></div>
+	</div>
+{% endfor %}	
+<div class="taskbox add" id="myBtn" onclick="clicked()">
+		
+		<i class="material-icons">add</i>
+
+</div>
+</div>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form method="GET" action="save" >
+      <input type="text" name="title" autocomplete="off" maxlength="10" placeholder="Title" required><br>
+      <textarea placeholder="Add your Tasks here.." name="text"></textarea>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+</div>
+</section>
+</main>
+</body>
+
+<script src="{% static 'todolist/js/func.js' %}"></script>
+</html>
